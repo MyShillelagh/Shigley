@@ -5,12 +5,20 @@ import matplotlib.pyplot as plt
 
 
 def circleplot(rad, center_x, center_y):
-    theta = np.linspace(0, 2 * np.pi, 100)
+    """
+    Plots a circle based on radius and centerpoint
+    :param rad: radius of circle
+    :param center_x: x-coordinate of the circle
+    :param center_y: y-coordinate of the circle
+    :return: A graph of the circle
+    """
+    theta = np.linspace(0, 2 * np.pi, 1000)
     x_vals = rad * np.cos(theta) + center_x
     y_vals = rad * np.sin(theta) + center_y
     graph = plt.plot(x_vals, y_vals)
     graph.set_xlabel('Stress')
     graph.set_ylabel('Torque')
+    # Gotta invert the y axis for a proper Mohr's circle
     graph.invert_yaxis()
     return graph
 
