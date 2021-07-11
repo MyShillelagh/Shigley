@@ -4,17 +4,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def circleplot(rad, center_x, center_y):
+def circleplot(stress1, stress2):
     """
-    Plots a circle based on radius and centerpoint
-    :param rad: radius of circle
-    :param center_x: x-coordinate of the circle
-    :param center_y: y-coordinate of the circle
+    Plots a Mohr's circle based on stresses
+    :param stress1: The first stress experienced by the element
+    :param stress2: The second stress experienced by the element
     :return: A graph of the circle
     """
+    rad, center = centerrad(stress1, stress2)
     theta = np.linspace(0, 2 * np.pi, 1000)
-    x_vals = rad * np.cos(theta) + center_x
-    y_vals = rad * np.sin(theta) + center_y
+    x_vals = rad * np.cos(theta) + center[0]
+    y_vals = rad * np.sin(theta) + center[1]
     graph = plt.plot(x_vals, y_vals)
     graph.set_xlabel('Stress')
     graph.set_ylabel('Torque')
