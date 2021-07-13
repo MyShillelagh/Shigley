@@ -12,9 +12,7 @@ def circleplot(stress1, stress2):
     :return: A graph of the circle
     """
     rad, center = centerrad(stress1, stress2)
-    theta = np.linspace(0, 2 * np.pi, 1000)
-    x_vals = rad * np.cos(theta) + center[0]
-    y_vals = rad * np.sin(theta) + center[1]
+    x_vals, y_vals = circlepoints(rad, center)
     graph = plt.plot(x_vals, y_vals)
     graph.set_xlabel('Stress')
     graph.set_ylabel('Torque')
@@ -24,11 +22,27 @@ def circleplot(stress1, stress2):
 
 
 def centerrad(stress1, stress2):
+    """
+    ADD HELPFUL COMMENTS HERE
+    """
     rad = np.sqrt((stress1[0] ** 2 - stress2[0] ** 2) +
                   (stress1[1] ** 2 - stress2[1] ** 2)) / 2
     center = (stress1 + stress2) / 2
     return rad, center
 
 
+def circlepoints(rad, center):
+    theta = np.linspace(0, 2 * np.pi, 1000)
+    x_vals = rad * np.cos(theta) + center[0]
+    y_vals = rad * np.sin(theta) + center[1]
+    return x_vals, y_vals
+
+
 if __name__ == "__main__":
-    print('Hello, world!')
+    stress1 = np.array([20, -10])
+    stress2 = np.array([5, 10])
+    testrad, testcenter = centerrad(stress1, stress2)
+    test_x, test_y = circlepoints(testrad, testcenter)
+    plt.plot(test_x, test_y)
+    plt.show()
+
