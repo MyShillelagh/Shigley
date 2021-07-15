@@ -13,11 +13,16 @@ def circleplot(stress1, stress2):
     """
     rad, center = centerrad(stress1, stress2)
     x_vals, y_vals = circlepoints(rad, center)
-    graph = plt.plot(x_vals, y_vals)
-    graph.set_xlabel('Stress')
-    graph.set_ylabel('Torque')
+    graph = plt.figure()
+    ax = graph.add_subplot()
+    ax.plot(x_vals, y_vals)
+    ax.set_xlabel('Stress')
+    ax.set_ylabel('Torque')
+    ax.axis('equal')
+    ax.axhline(y=0, color='k')
+    ax.axvline(x=0, color='k')
     # Gotta invert the y axis for a proper Mohr's circle
-    graph.invert_yaxis()
+    ax.invert_yaxis()
     return graph
 
 
@@ -41,8 +46,5 @@ def circlepoints(rad, center):
 if __name__ == "__main__":
     stress1 = np.array([20, -10])
     stress2 = np.array([5, 10])
-    testrad, testcenter = centerrad(stress1, stress2)
-    test_x, test_y = circlepoints(testrad, testcenter)
-    plt.plot(test_x, test_y)
-    plt.show()
-
+    graph = circleplot(stress1, stress2)
+    graph.savefig('test.png')
