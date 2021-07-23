@@ -37,6 +37,12 @@ def centerrad(stress1, stress2):
 
 
 def circlepoints(rad, center):
+    """
+    Gives x and y values of a circle with a given radius and center
+    :param rad: Radius of circle
+    :param center: Location of center of circle in form [x, y]
+    :return: x and y values that can be used to plot circle
+    """
     theta = np.linspace(0, 2 * np.pi, 1000)
     x_vals = rad * np.cos(theta) + center[0]
     y_vals = rad * np.sin(theta) + center[1]
